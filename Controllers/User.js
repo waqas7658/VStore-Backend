@@ -13,6 +13,7 @@ exports.loginUser = async (req, res) => {
       message: "User login successfully",
       userName: userFound.userName,
       email: userFound.email,
+      role: userFound.role,
       password: generateToken(userFound.id),
     });
   } catch (error) {
@@ -24,11 +25,16 @@ exports.loginUser = async (req, res) => {
 //Signup
 exports.signupUser = async (req, res, next) => {
   try {
-    const { userName, email, password } = req.body;
+    const { userName, email, password, role } = req.body;
     const salt = await bcrypt.genSalt(10);
 
     const hashPassword = await bcrypt.hash(password, salt);
-    const user = await User.create({ userName, email, password: hashPassword });
+    const user = await User.create({
+      userName,
+      email,
+      password: hashPassword,
+      role,
+    });
     res.json({ message: "User has been registered", user });
   } catch (error) {
     console.log(error.message);

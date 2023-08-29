@@ -7,7 +7,6 @@ const ProductSchema = new Schema(
       type: String,
       required: true,
     },
-
     description: {
       type: String,
       required: true,
@@ -20,8 +19,19 @@ const ProductSchema = new Schema(
       type: String,
       required: true,
     },
+    category: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Category",
+        required: true,
+      },
+    ],
+    isFeatured: {
+      type: Boolean,
+      required: true,
+    },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("products", ProductSchema);
+module.exports = mongoose.model("Product", ProductSchema);

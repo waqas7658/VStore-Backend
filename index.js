@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 
 const ProductRoutes = require("./Routes/ProdcutRoutes");
 const userRoutes = require("./Routes/userRoutes");
+const Categories = require("./Routes/Category");
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(cors());
 // Routes
 app.use("/api/products", ProductRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/category", Categories);
 
 const PORT = process.env.PORT || 5000;
 const url = "mongodb://127.0.0.1/e-commerce";

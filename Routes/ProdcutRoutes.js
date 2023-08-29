@@ -8,6 +8,8 @@ const {
   singleProduct,
   deleteProducts,
   updateProduct,
+  CountProduct,
+  filterProducts,
 } = require("../Controllers/Products");
 
 const router = express.Router();
@@ -26,7 +28,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.get("/allproducts", getProducts);
+router.get("/productscount", CountProduct);
 router.get("/singleproduct/:id", singleProduct);
+router.get("/filterproducts/:categoryId", filterProducts);
 router.delete("/deleteproduct/:id", deleteProducts);
 router.post("/postproduct", upload.single("image"), postProducts);
 router.put("/updateproduct/:id", upload.single("image"), updateProduct);
